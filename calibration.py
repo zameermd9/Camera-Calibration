@@ -22,6 +22,10 @@ for image in images:
     if ret:
         objpoints.append(objp)
         imgpoints.append(cv.cornerSubPix(gray, corners, (11, 11), (-1, -1), criteria))
+        cv.drawChessboardCorners(img, chessboardSize, corners, ret)
+        cv.imshow('img', img)
+        cv.waitKey(500)
+cv.destroyAllWindows()
       
     
 
