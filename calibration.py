@@ -34,6 +34,12 @@ if objpoints and imgpoints:
     ret, cameraMatrix, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
     pickle.dump((cameraMatrix, dist), open("calibration.pkl", "wb"))
     print("CameraMatrix:", cameraMatrix, "\nDist:", dist)
+
+#undistortion
+img = cv.imread('images/img67.png')
+
+h, w = img.shape[:2]
+newCameraMatrix, roi = cv.getOptimalNewCameraMatrix(cameraMatrix, dist, (w,h), 1, (w,h))
     
 
     mean_error = 0
