@@ -1,5 +1,5 @@
 import numpy as np
-import cv
+import cv2 as cv
 import glob
 import pickle
 
@@ -11,9 +11,12 @@ criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30,0.001)
 objp = np.zeros((chessboardSize[0] * chessboardSize[1], 3), np.float32)
 objp[:,:2] = np.mgrid[0:chessboardSize[0], 0:chessboardSize[1]].T.reshape(-1, 2)
 
+size_of_chessboard_squares_mm = 25
+objp = objp * size_of_chessboard_squares_mm
+
 objpoints = []  
 imgpoints = []
-images = glob.glob('"C:\Users\Sanjana\Desktop\project 1\camera calibration2/*.png')
+images = glob.glob('C:\Users\Sanjana\Desktop\project 1\camera calibration2/*.png')
 
 
 for image in images:
