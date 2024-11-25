@@ -26,6 +26,11 @@ for image in images:
         cv.imshow('img', img)
         cv.waitKey(500)
 cv.destroyAllWindows()
+if objpoints and imgpoints:
+    ret, cameraMatrix, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
+   
+
+
       
     
 
