@@ -31,6 +31,10 @@ if objpoints and imgpoints:
     pickle.dump((cameraMatrix, dist), open("calibration.pkl", "wb"))
     print("CameraMatrix:", cameraMatrix, "\nDist:", dist)
 
+error = np.mean([imgpoints[i],cv.projectpoints])
+
+
+
 
       
     
