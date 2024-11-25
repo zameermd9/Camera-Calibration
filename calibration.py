@@ -31,7 +31,11 @@ if objpoints and imgpoints:
     pickle.dump((cameraMatrix, dist), open("calibration.pkl", "wb"))
     print("CameraMatrix:", cameraMatrix, "\nDist:", dist)
 
-error = np.mean([imgpoints[i],cv.projectpoints])
+error = np.mean(imgpoints[i],cv.projectpoints(objpoints[i],rvecs[i], tvecs[i], cameraMatrix, dist)[0], cv.NORM_L2)/len(imgpoints[i])
+ for i in range(len(objpoints))
+  print(f"Total reprojection error: {error}")
+else:
+    print("No valid images with detected corners for calibration.")
 
 
 
