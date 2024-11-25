@@ -13,7 +13,8 @@ objp[:,:2] = np.mgrid[0:chessboardSize[0], 0:chessboardSize[1]].T.reshape(-1, 2)
 
 objpoints = []  
 imgpoints = []
-images = glob.glob('/Users/zameerhussainmohammed/Desktop/camera calibration2/images/*.png')
+images = glob.glob('"C:\Users\Sanjana\Desktop\project 1\camera calibration2/*.png')
+
 
 for image in images:
     img = cv.imread(image)
