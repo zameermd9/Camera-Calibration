@@ -28,7 +28,8 @@ for image in images:
 cv.destroyAllWindows()
 if objpoints and imgpoints:
     ret, cameraMatrix, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
-   
+    pickle.dump((cameraMatrix, dist), open("calibration.pkl", "wb"))
+    print("CameraMatrix:", cameraMatrix, "\nDist:", dist)
 
 
       
