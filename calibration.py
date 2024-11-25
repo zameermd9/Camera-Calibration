@@ -17,23 +17,32 @@ objp = objp * size_of_chessboard_squares_mm
 objpoints = []  
 imgpoints = []
 images = glob.glob('C:\Users\Sanjana\Desktop\project 1\camera calibration2/*.png')
+if not images:
+    print("No images found in the specified directory!")
+    exit()
 
 
 for image in images:
     img = cv.imread(image)
     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     ret, corners = cv.findChessboardCorners(gray, chessboardSize, None)
-    if ret:
+    if ret == True:
         objpoints.append(objp)
-        imgpoints.append(cv.cornerSubPix(gray, corners, (11, 11), (-1, -1), criteria))
+        corners2 = cv.cornerSubPix(gray, corners, (11,11), (-1,-1), criteria)
+        imgpoints.append(corners)
+
+    #Draw and Display corners
         cv.drawChessboardCorners(img, chessboardSize, corners, ret)
         cv.imshow('img', img)
-        cv.waitKey(500)
+        cv.waitKey(1000)
 cv.destroyAllWindows()
-if objpoints and imgpoints:
-    ret, cameraMatrix, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
-    pickle.dump((cameraMatrix, dist), open("calibration.pkl", "wb"))
-    print("CameraMatrix:", cameraMatrix, "\nDist:", dist)
+
+#calibration
+
+ret, cameraMatrix, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
+
+pickle.dump((cameraMatrix, dist), open("calibration.pkl", "wb"))
+print("CameraMatrix:", cameraMatrix, "\nDist:", dist)
 
 #undistortion
 img = cv.imread('images/img67.png')
@@ -58,9 +67,9 @@ x, y, w, h = roi
 dst = dst[y:y+h, x:x+w]
 cv.imwrite('caliResult2.jpg', dst)
     
-
-    mean_error = 0
-    for i in range(len(objpoints)):
+#reprojection error
+mean_error = 0
+for i in range(len(objpoints)):
         imgpoints2, _ = cv.projectPoints(objpoints[i], rvecs[i], tvecs[i], cameraMatrix, dist)
         error = cv.norm(imgpoints[i], imgpoints2, cv.NORM_L2) / len(imgpoints2)
         mean_error += error
