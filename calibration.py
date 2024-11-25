@@ -43,6 +43,11 @@ newCameraMatrix, roi = cv.getOptimalNewCameraMatrix(cameraMatrix, dist, (w,h), 1
 
 #undistort
 dst = cv.undistort(img, cameraMatrix, dist, None, newCameraMatrix)
+
+# crop the image
+x, y, w, h = roi
+dst = dst[y:y+h, x:x+w]
+cv.imwrite('caliResult1.jpg', dst)
     
 
     mean_error = 0
