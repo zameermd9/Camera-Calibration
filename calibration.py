@@ -40,6 +40,9 @@ img = cv.imread('images/img67.png')
 
 h, w = img.shape[:2]
 newCameraMatrix, roi = cv.getOptimalNewCameraMatrix(cameraMatrix, dist, (w,h), 1, (w,h))
+
+#undistort
+dst = cv.undistort(img, cameraMatrix, dist, None, newCameraMatrix)
     
 
     mean_error = 0
