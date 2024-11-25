@@ -16,7 +16,7 @@ objp = objp * size_of_chessboard_squares_mm
 
 objpoints = []  
 imgpoints = []
-images = glob.glob('C:\Users\Sanjana\Desktop\project 1\camera calibration2/*.png')
+images = glob.glob('C:\\Users\\Sanjana\\Desktop\\opencv code\\*.png')
 if not images:
     print("No images found in the specified directory!")
     exit()
@@ -24,6 +24,10 @@ if not images:
 
 for image in images:
     img = cv.imread(image)
+    if img is None:
+        print(f"Could not load image: {image}")
+        continue
+
     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     ret, corners = cv.findChessboardCorners(gray, chessboardSize, None)
     if ret == True:
@@ -39,7 +43,7 @@ cv.destroyAllWindows()
 
 #calibration
 
-ret, cameraMatrix, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
+ret, cameraMatrix, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, frameSize, None, None)
 
 pickle.dump((cameraMatrix, dist), open("calibration.pkl", "wb"))
 print("CameraMatrix:", cameraMatrix, "\nDist:", dist)
