@@ -14,7 +14,7 @@ Inputs:
 
 Things i did in Building this Code:
 
-1.Built the code for the working of Realsense camera(realsense_camera.py)
+1.Built the code for the working of Realsense camera(realsense_camera.py) and clicked several Images in different angles of checker board.
 
 2.Using a Checkerboard: I used a checkerboard with 8x6 squares to calibrate the camera because it’s a common and accurate tool for this purpose.
 
