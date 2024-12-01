@@ -12,9 +12,12 @@ Inputs:
 
 2.Download the Images in GITHUB link and copy the images link as path and paste in line 19 (images = glob.glob(' ')) in python code
 
+
 Output:
 
-I used D435 Real sense camera and i have done calibration in 640*480 Resolution and i got focallength ~ 875mm through calibration matrix
+I used D435 Real sense camera and i have done calibration in 640*480 Resolution and i got focallength ~ 875mm through calibration matrix.
+
+
 
 Things i did in Building this Code:
 
